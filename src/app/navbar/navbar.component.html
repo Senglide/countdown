@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" routerLink="/home">Countdown</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" (click)="isCollapsed = !isCollapsed">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarContent" class="collapse navbar-collapse" [ngbCollapse]="isCollapsed" (click)="isCollapsed = !isCollapsed">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
+            </li>
+            <li class="nav-item" *ngIf="!user">
+                <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+            </li>
+            <li class="nav-item" *ngIf="user">
+                <a class="nav-link" routerLink="/user-home" routerLinkActive="active">My Home</a>
+            </li>
+            <li class="nav-item" *ngIf="user">
+                <a class="nav-link" routerLink="/user-suggestions" routerLinkActive="active">My Suggestions</a>
+            </li>
+            <li class="nav-item" *ngIf="user">
+                <a class="nav-link" routerLink="/profile" routerLinkActive="active">My Profile</a>
+            </li>
+            <li class="nav-item" *ngIf="user">
+                <a class="nav-link" routerLink="/login" (click)="authService.logout()">Logout</a>
+            </li>
+            <li class="nav-item" *ngIf="user && userInfo">
+                <div class="nav-link">
+                    <img [src]="user.photoURL" class="avatar">
+                    {{ userInfo.alias }}
+                </div>
+            </li>
+        </ul>   
+    </div>
+</nav>

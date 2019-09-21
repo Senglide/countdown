@@ -1,0 +1,104 @@
+.jumbotron {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    #totalTimer {
+        .row:after {
+            display: table;
+            clear: both;
+        }
+        #jumbotronTop {
+            #timerDescription{
+                float: left;
+                width: 15%;
+            }
+            #timerHeader {
+                float: left;
+                width: 70%;
+            }
+            #buttons {
+                float: left;
+                width: 15%;
+            }
+            #crudControls button {
+                margin: 0px;
+            }
+            #crudControls div:nth-child(2) {
+                margin-top: 5px;
+            }
+        }
+        #timerDescription, #timerCreator {
+            text-align: left;
+        }
+        #timerHeader, #timerCategories {
+            text-align: center;
+        }
+        #buttons, #timerSubscriptions, #isPublic {
+            text-align: right;
+        }
+        #timerCredentials p {
+            margin-bottom: 0px;
+        }
+        #timerCredentials {
+            .column {
+                float: left;
+                width: 33.33%;
+            }
+        }
+    }
+}
+
+#confirmSubscriptionModal {
+    text-align: center;
+    .modal-title {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .modal-footer {
+        position: relative;
+        #cancelButton {
+            position: absolute;
+            left: 15px;
+        }
+    }
+}
+
+#editTimerModal {
+    text-align: center;
+    .modal-title {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    hr {
+        width: 80%;
+    }
+    .modal-body {
+        #dateTime {
+            text-align: left;
+            #timeDiv {
+                float: right;
+            }
+        }
+        textarea {
+            resize: none;
+            width: 80%;
+        }
+        #categories {
+            text-align: left;
+            #fieldsetLeft {
+                float: left;
+                margin-left: 25%;
+            }
+            #fieldsetRight {
+                float: right;
+                margin-right: 25%;
+            }
+        }
+    }
+    .modal-footer {
+        position: relative;
+        #cancelButton {
+            position: absolute;
+            left: 15px;
+        }
+    }
+}

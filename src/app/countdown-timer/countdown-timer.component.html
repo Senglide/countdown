@@ -1,0 +1,118 @@
+<div class="jumbotron">
+  <div id="totalTimer">
+    <div id="jumbotronTop" class="row">
+      <div id="timerDescription" class="column"> 
+        <button placement="right" ngbPopover="{{ formatDescription() }}" popoverTitle="Extra info about {{ countdownTimer.name }}"><i class="fas fa-info"></i></button>
+      </div>
+      <div id="timerHeader" class="column">
+        <h3>{{ countdownTimer.name }}</h3>
+        <h5>on {{ countdownTimer.endDate.toLocaleDateString('en-BE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) }}</h5>    
+        <p>{{ formatTimer() }}</p> 
+      </div>
+      <div id="buttons" class="column">
+        <div id="crudControls" *ngIf="!globalHome && !isSubscription && buttonsEnabled">
+          <div>
+            <button id="removeTimer" (click)="deleteTimer()"><i class="fas fa-trash"></i></button>
+          </div>
+          <div>
+            <button id="editTimer" (click)="openModal(editTimer)"><i class="fas fa-pen"></i></button>
+          </div>
+        </div>
+        <div id="subscribeControls">
+          <button id="subscribeButton" class="subscribe" (click)="openModal(confirmSubscriptionModal)" *ngIf="loggedUserInfo && globalHome && !isSubscription && !ownedByLoggedUser && buttonsEnabled"><i class="fas fa-plus"></i></button>
+          <button id="unsubscribeButton" class="subscribe" (click)="openModal(confirmUnsubscriptionModal)" *ngIf="loggedUserInfo && isSubscription && buttonsEnabled"><i class="fas fa-minus"></i></button>    
+        </div>
+      </div>
+    </div>
+    <div id="timerCredentials" class="row">
+      <p id="timerCreator" class="column">{{ formatTimerCreator() }}</p>
+      <p id="timerCategories" class="column">{{ formatCategories() }}</p>
+      <p id="timerSubscriptions" class="column" *ngIf="globalHome || isSubscription">Subscriptions: {{ countdownTimer.subscriptions }}</p>
+      <p id="isPublic" class="column" *ngIf="!globalHome && ownedByLoggedUser">{{ formatIsPublic() }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #editTimer let-modal>
+  <div id="editTimerModal">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit CountdownTimer</h4>
+    </div>
+    <div class="modal-body">
+      <label for="name" class="mr-2">Give your timer a name: </label>
+      <input id="name" type="text" value="{{ countdownTimer.name }}" #name>
+      <hr/>
+      <label for="datetime">Choose a date and time: </label>
+      <div id="dateTime">
+        <ngb-datepicker id="date" class="ml-4" [(ngModel)]="date"></ngb-datepicker>
+        <div id="timeDiv" class="mr-4 mt-4">
+          <ngb-timepicker id="time" [(ngModel)]="time"></ngb-timepicker>
+          <div class="mt-4">
+            <p>Selected moment:</p>
+            <p>{{ formatDateTime() }}</p>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <p>Provide a description (optional):</p>
+      <textarea #description>{{ countdownTimer.description }}</textarea>
+      <hr/>
+      <p>Select categories (optional):</p>
+      <div id="categories">
+        <fieldset>
+          <div id="fieldsetLeft">
+            <input class="mr-2" type="checkbox" value="Releases" [checked]="checkChecked('Releases')" (change)="updateCategories('Releases')">Releases<br>      
+            <input class="mr-2" type="checkbox" value="Events" [checked]="checkChecked('Events')" (change)="updateCategories('Events')">Events<br>
+          </div>
+          <div id="fieldsetRight">
+            <input class="mr-2" type="checkbox" value="Deadlines" [checked]="checkChecked('Deadlines')" (change)="updateCategories('Deadlines')">Deadlines<br>
+            <input class="mr-2" type="checkbox" value="Varia" [checked]="checkChecked('Varia')" (change)="updateCategories('Varia')">Varia<br>
+          </div>   
+        </fieldset> 
+      </div>
+      <hr/>
+      <div class="form-check">
+        <input id="isPublic" class="form-check-input" type="checkbox" [checked]="countdownTimer.isPublic" (change)="toggleChecked()">
+        <label class="form-check-label" for="isPublic">Make countdown public</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button id="cancelButton" type="button" class="btn btn-outline-dark" (click)="closeEditModal()">Cancel</button>
+      <button type="button" class="btn btn-outline-dark" (click)="closeEditModal(name.value, description.value)">Save</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #confirmSubscriptionModal let-modal>
+  <div id="confirmSubscriptionModal">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Confirm Subscription</h4>
+    </div>
+    <div class="modal-body">
+      <h6>Do you want to add this timer to your calendar?</h6>
+      <p>Details:</p>
+      <p>{{ countdownTimer.name }} on {{ countdownTimer.endDate.toLocaleDateString('en-BE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) }}</p>
+    </div>
+    <div class="modal-footer">
+      <button id="cancelButton" type="button" class="btn btn-outline-dark" (click)="closeSubscriptionModal('no')">No</button>
+      <button type="button" class="btn btn-outline-dark" (click)="closeSubscriptionModal('yes')">Yes</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #confirmUnsubscriptionModal let-modal>
+  <div id="confirmSubscriptionModal">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Confirm Unsubscription</h4>
+    </div>
+    <div class="modal-body">
+      <h6>Do you want to remove this subscription from your calendar?</h6>
+      <p>Details:</p>
+      <p>{{ countdownTimer.name }} on {{ countdownTimer.endDate.toLocaleDateString('en-BE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) }}</p>
+    </div>
+    <div class="modal-footer">
+      <button id="cancelButton" type="button" class="btn btn-outline-dark" (click)="closeUnsubscribeModal('no')">No</button>
+      <button type="button" class="btn btn-outline-dark" (click)="closeUnsubscribeModal('yes')">Yes</button>
+    </div>
+  </div>
+</ng-template>

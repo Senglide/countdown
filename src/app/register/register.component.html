@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <h4>Sign Up</h4>
+  <div class="alert alert-dismissible fade show" [ngClass]="alertBox.color" *ngIf="alertBox">
+    <p [innerHTML]="alertBox.message"></p>
+    <button type="button" class="close" (click)="authService.clearMessage();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form #f="ngForm">
+    <div class="form-group">
+      <input type="email" class="form-control" name="email" id="email" placeholder="Enter email"
+        required
+        pattern="\S+@\S+\.\S+"
+        [(ngModel)]="loginData.email"
+        #email>
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" name="password" id="password"
+        placeholder="Password (6+ characters)"
+        required
+        minlength="6"
+        [(ngModel)]="loginData.password"
+        #password>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="alias" id="alias"
+        placeholder="Choose an alias"
+        required
+        [(ngModel)]="loginData.alias"
+        #alias>
+    </div>
+    <button type="button" class="btn btn-outline-success mr-2" (click)="emailSignUp(f.value, f.valid)">
+      Sign up
+    </button>
+  </form>
+</div>

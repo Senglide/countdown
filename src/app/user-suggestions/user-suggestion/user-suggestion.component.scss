@@ -1,0 +1,31 @@
+.jumbotron{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    .row:after {
+        display: table;
+        clear: both;
+    }
+    #jumboHeader {
+        #leftColumn {
+            float: left;
+            width: 80%;
+        }
+        #rightColumn {
+            position: relative;
+            float: left;
+            width: 20%;
+            text-align: right;
+            p {
+                position: absolute;
+                bottom: 0px;
+                right: 0px;
+            }
+        }
+    }
+    #jumboFooter {
+        border: 1px solid black;
+        p {
+            text-decoration-line: underline;
+        }
+    }
+}

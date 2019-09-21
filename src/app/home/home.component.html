@@ -1,0 +1,18 @@
+<div id="fullHomePage">
+  <h1>Welcome to Countdown!</h1>
+  <h2>Your all TIME favourite</h2>
+  <div class="row">
+    <div id="chronologically" class="container mt-5 column">
+      <h3>Chronologically</h3>
+      <div>
+        <app-countdown-timer *ngFor="let timer of publicTimers" [countdownTimer]="timer" [globalHome]="true"></app-countdown-timer>
+      </div>
+    </div>
+    <div id="mostPopular" class="container mt-5 column">
+      <h3>Most Popular</h3>
+      <div>
+        <app-countdown-timer *ngFor="let popularTimer of mostPopularTimers" [countdownTimer]="popularTimer" [globalHome]="true"></app-countdown-timer>
+      </div>
+    </div>
+  </div>
+</div>

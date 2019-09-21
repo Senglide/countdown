@@ -1,0 +1,8 @@
+<div class="container mt-5">
+  <div id="pageHeader">
+    <h1>My Suggestions</h1>
+    <h3>Showing events for area: {{ location }}</h3>
+    <h5>Suggestions provided by <a target="_blank" href="https://www.meetup.com">Meetup.com</a></h5>
+  </div>
+  <app-user-suggestion *ngFor="let meetupEvent of meetupEvents" [meetupEvent]="meetupEvent"></app-user-suggestion>
+</div>

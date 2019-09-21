@@ -1,0 +1,70 @@
+<div class="container mt-5">
+  <div style="text-align:center;margin-bottom:25px;">
+    <h1>My Home</h1>
+    <button (click)="newCountdownModal(newTimer)">Add new countdown</button>    
+  </div>
+  <app-countdown-timer *ngFor="let timer of timers" [countdownTimer]="timer" [globalHome]="false"></app-countdown-timer>
+</div>
+
+<ng-template #newTimer let-modal>
+  <div id="newTimerModal">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add a new CountdownTimer</h4>
+    </div>
+    <div class="modal-body">
+      <label for="name" class="mr-2">Give your timer a name: </label>
+      <input id="name" type="text" #name>
+      <hr/>
+      <label for="datetime">Choose a date and time: </label>
+      <div id="dateTime">
+        <ngb-datepicker id="date" class="ml-4" [(ngModel)]="date"></ngb-datepicker>
+        <div id="timeDiv" class="mr-4 mt-4">
+          <ngb-timepicker id="time" [(ngModel)]="time"></ngb-timepicker>
+          <div class="mt-4">
+            <p>Selected moment:</p>
+            <p>{{ formatDateTime() }}</p>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <p>Provide a description (optional):</p>
+      <textarea #description></textarea>
+      <hr/>
+      <p>Select categories (optional):</p>
+      <div id="categories">
+        <fieldset>
+          <div id="fieldsetLeft">
+            <input class="mr-2" type="checkbox" value="Releases" (change)="updateCategories('Releases')">Releases<br>      
+            <input class="mr-2" type="checkbox" value="Events" (change)="updateCategories('Events')">Events<br>
+          </div>
+          <div id="fieldsetRight">
+            <input class="mr-2" type="checkbox" value="Deadlines" (change)="updateCategories('Deadlines')">Deadlines<br>
+            <input class="mr-2" type="checkbox" value="Varia" (change)="updateCategories('Varia')">Varia<br>
+          </div>   
+        </fieldset> 
+      </div>
+      <hr/>
+      <div class="form-check">
+        <input id="isPublic" class="form-check-input" type="checkbox" (change)="toggleChecked()">
+        <label class="form-check-label" for="isPublic">Make countdown public</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button id="cancelButton" type="button" class="btn btn-outline-dark" (click)="closeCountdownModal()">Cancel</button>
+      <button type="button" class="btn btn-outline-dark" (click)="saveCountdownModal(name.value, description.value, errorModal)">Save</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #errorModal let-modal>
+  <div class="modal-header">
+    <p>Submitted Countdown lies in the past</p>
+  </div>
+  <div class="modal-body">
+    <p>{{ errorMessage }}</p>
+  </div>
+  <div class="modal-footer">
+    <button id="cancelErrorButton" type="button" class="btn btn-outline-dark" (click)="closeErrorModal()">Ok</button>
+  </div>
+</ng-template>
+  

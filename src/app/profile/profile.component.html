@@ -1,0 +1,5 @@
+<div class="container mt-5" *ngIf="user && userInfo">
+  <label for="displayName" class="mr-2">My alias: </label>
+  <input id="displayName" type="text" value="{{ userInfo.alias }}" #displayName>
+  <button (click)="updateProfile(displayName.value)">Update alias</button>
+</div>

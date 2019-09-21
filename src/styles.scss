@@ -1,0 +1,64 @@
+// Link naar BS en FA
+@import "~bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+.btn {
+    cursor: pointer;
+}
+
+.btn-outline-secondary {
+    cursor: not-allowed;
+}
+
+.navbar-text {
+    font-size: 70%;
+    color: white !important;
+}
+
+.avatar {
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#newTimerModal {
+    text-align: center;
+    .modal-title {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    hr {
+        width: 80%;
+    }
+    .modal-body {
+        #dateTime {
+            text-align: left;
+            #timeDiv {
+                float: right;
+            }
+        }
+        textarea {
+            resize: none;
+            width: 80%;
+        }
+        #categories {
+            text-align: left;
+            #fieldsetLeft {
+                float: left;
+                margin-left: 25%;
+            }
+            #fieldsetRight {
+                float: right;
+                margin-right: 25%;
+            }
+        }
+    }
+    .modal-footer {
+        position: relative;
+        #cancelButton {
+            position: absolute;
+            left: 15px;
+        }
+    }
+}

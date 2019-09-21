@@ -1,0 +1,44 @@
+#fullHomePage {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    padding-top: 10px;
+    h1, h2 {
+        text-align: center;
+    }
+    #chronologically, #mostPopular {
+        div {
+            padding-top: 16px;
+            padding-left: 2%;
+            padding-right: 2%;
+            border: 2px solid black;
+            border-radius: 5%;
+        }
+        h3 {
+            text-align: center;
+        }
+    }
+    #mostPopular {
+        margin-left: 2%;
+    }
+    .row {
+        margin-top: -25px;
+    }
+    .row:after {
+        display: table;
+        clear: both;
+    }
+    .column {
+        float: left;
+        width: 49%;
+    }
+}
+@media (max-width:750px){
+    #fullHomePage {
+        .column {
+            float: none;
+            width: auto;
+        }
+    }
+}
